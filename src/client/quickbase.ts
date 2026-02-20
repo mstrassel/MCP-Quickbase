@@ -153,6 +153,25 @@ export class QuickbaseClient {
   }
 
   /**
+   * Get the currently configured default application ID
+   * @returns Default application ID, if set
+   */
+  public getDefaultAppId(): string | undefined {
+    return this.config.appId;
+  }
+
+  /**
+   * Set or clear the default application ID used by app-scoped tools
+   * @param appId Application ID to set; pass undefined to clear
+   */
+  public setDefaultAppId(appId?: string): void {
+    this.config.appId = appId;
+    logger.info("Updated default application context", {
+      appId: this.config.appId || "none",
+    });
+  }
+
+  /**
    * Invalidate a cache entry
    * @param key Cache key to invalidate
    */

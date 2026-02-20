@@ -3,6 +3,8 @@ import { toolRegistry } from "../registry";
 import { CreateAppTool } from "./create_app";
 import { UpdateAppTool } from "./update_app";
 import { ListTablesTool } from "./list_tables";
+import { SetDefaultAppTool } from "./set_default_app";
+import { GetDefaultAppTool } from "./get_default_app";
 import { createLogger } from "../../utils/logger";
 
 const logger = createLogger("AppTools");
@@ -18,6 +20,8 @@ export function registerAppTools(client: QuickbaseClient): void {
   toolRegistry.registerTool(new CreateAppTool(client));
   toolRegistry.registerTool(new UpdateAppTool(client));
   toolRegistry.registerTool(new ListTablesTool(client));
+  toolRegistry.registerTool(new SetDefaultAppTool(client));
+  toolRegistry.registerTool(new GetDefaultAppTool(client));
 
   logger.info("App management tools registered");
 }
@@ -26,3 +30,5 @@ export function registerAppTools(client: QuickbaseClient): void {
 export * from "./create_app";
 export * from "./update_app";
 export * from "./list_tables";
+export * from "./set_default_app";
+export * from "./get_default_app";

@@ -115,6 +115,8 @@ The server can start without environment variables configured, but tools will no
 - **`create_app`** - Create new Quickbase applications
 - **`update_app`** - Update existing applications
 - **`list_tables`** - List all tables in an application
+- **`set_default_app`** - Dynamically set/clear the default app context at runtime
+- **`get_default_app`** - Get the current runtime default app context
 
 ### Table Operations
 - **`create_table`** - Create new tables
@@ -136,10 +138,35 @@ The server can start without environment variables configured, but tools will no
 - **`upload_file`** - Upload files to file attachment fields
 - **`download_file`** - Download files from records
 
+### QBL Cleanup
+- **`cleanup_qbl_summary_fields`** - Remove unsupported default properties from `QB::Field::Summary` entries in QBL YAML files
+- **`cleanup_qbl_formv2_sections`** - In `QB::FormV2::Section`, set `IsCollapsible: false` when `Title:` is blank
+
 ### Reporting
 - **`run_report`** - Execute Quickbase reports
 
 ## 📚 Usage Examples
+
+### Dynamic Multi-App Workflow
+```
+Get current default app context
+```
+
+```
+Set default app to "bvnwkehdj"
+```
+
+```
+List tables (uses current default app if app_id is omitted)
+```
+
+```
+Set default app to "anotherAppId" and continue operations
+```
+
+```
+Clear default app context
+```
 
 ### Basic Record Query
 ```
@@ -161,6 +188,8 @@ Upload invoice.pdf to the Documents field in record 123
 - API tokens are handled securely and never logged
 - All file operations are sandboxed to the working directory
 - Supports field-level permissions and access controls
+- Dependency advisories are monitored locally via npm audit commands (for example: npm run audit)
+- Current `eslint` / `@typescript-eslint` / `jest` chain remains on stable compatible versions until upstream patched releases are available
 
 ## 📋 Requirements
 

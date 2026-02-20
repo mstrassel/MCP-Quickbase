@@ -60,5 +60,15 @@ describe("QuickbaseClient", () => {
       const clientWithDefaults = new QuickbaseClient(defaultConfig);
       expect(clientWithDefaults).toBeInstanceOf(QuickbaseClient);
     });
+
+    it("should get and set default app ID dynamically", () => {
+      expect(client.getDefaultAppId()).toBe("test-app-id");
+
+      client.setDefaultAppId("another-app-id");
+      expect(client.getDefaultAppId()).toBe("another-app-id");
+
+      client.setDefaultAppId(undefined);
+      expect(client.getDefaultAppId()).toBeUndefined();
+    });
   });
 });

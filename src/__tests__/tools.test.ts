@@ -36,6 +36,8 @@ describe("Tool Registry", () => {
       expect(toolNames).toContain("create_app");
       expect(toolNames).toContain("update_app");
       expect(toolNames).toContain("list_tables");
+      expect(toolNames).toContain("set_default_app");
+      expect(toolNames).toContain("get_default_app");
       expect(toolNames).toContain("create_table");
       expect(toolNames).toContain("update_table");
       expect(toolNames).toContain("get_table_fields");
@@ -55,9 +57,11 @@ describe("Tool Registry", () => {
       expect(toolNames).toContain("create_relationship");
       expect(toolNames).toContain("update_relationship");
       expect(toolNames).toContain("delete_relationship");
+      expect(toolNames).toContain("cleanup_qbl_summary_fields");
+      expect(toolNames).toContain("cleanup_qbl_formv2_sections");
 
       // Verify total count
-      expect(toolNames.length).toBe(24);
+      expect(toolNames.length).toBe(28);
     });
 
     it("should register tools in correct categories", () => {
@@ -67,7 +71,13 @@ describe("Tool Registry", () => {
 
       // Check that we have tools from all categories
       const appTools = allTools.filter((tool) =>
-        ["create_app", "update_app", "list_tables"].includes(tool.name),
+        [
+          "create_app",
+          "update_app",
+          "list_tables",
+          "set_default_app",
+          "get_default_app",
+        ].includes(tool.name),
       );
       const tableTools = allTools.filter((tool) =>
         ["create_table", "update_table", "get_table_fields"].includes(
@@ -90,7 +100,7 @@ describe("Tool Registry", () => {
         tool.name.includes("relationship"),
       );
 
-      expect(appTools.length).toBe(3);
+      expect(appTools.length).toBe(5);
       expect(tableTools.length).toBe(3);
       expect(fieldTools.length).toBe(4);
       expect(recordTools.length).toBe(5);
@@ -119,7 +129,7 @@ describe("Tool Registry", () => {
 
       initializeTools(mockClient, mockCache);
 
-      expect(toolRegistry.getToolCount()).toBe(24);
+      expect(toolRegistry.getToolCount()).toBe(28);
     });
   });
 });

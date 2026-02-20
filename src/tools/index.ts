@@ -10,6 +10,8 @@ import { registerRecordTools } from "./records";
 import { registerFileTools } from "./files";
 import { registerReportTools } from "./reports";
 import { registerRelationshipTools } from "./relationships";
+import { CleanupQblSummaryFieldsTool } from "./cleanup_qbl_summary_fields";
+import { CleanupQblFormV2SectionsTool } from "./cleanup_qbl_formv2_sections";
 import { createLogger } from "../utils/logger";
 
 const logger = createLogger("ToolsInit");
@@ -50,6 +52,10 @@ export function initializeTools(
   // Register relationship management tools
   registerRelationshipTools(client);
 
+  // Register QBL cleanup tools
+  toolRegistry.registerTool(new CleanupQblSummaryFieldsTool(client));
+  toolRegistry.registerTool(new CleanupQblFormV2SectionsTool(client));
+
   logger.info(`Registered ${toolRegistry.getToolCount()} tools`);
 }
 
@@ -65,3 +71,5 @@ export * from "./records";
 export * from "./files";
 export * from "./reports";
 export * from "./relationships";
+export * from "./cleanup_qbl_summary_fields";
+export * from "./cleanup_qbl_formv2_sections";
